@@ -12,7 +12,7 @@ public class SaveLoadTest : MonoBehaviour
     [SerializeField] GameObject addProfilePanel;
     [SerializeField] GameObject mainProfileMenuPanel;
 
-    //[SerializeField] TextMeshProUGUI error;
+   [SerializeField] TextMeshProUGUI error;
 
     [SerializeField] GameObject[] profileButtons;
 
@@ -42,18 +42,32 @@ public class SaveLoadTest : MonoBehaviour
 
     public void ChangeProfile(int profileNo)
     {
-        path = $"SaveData\\Profile{currentProfile + 1}";
-        currentProfile = profileNo;
+        path = $"SaveData\\Profile{profileNo + 1}";
+        myName.playerName = "";
+        myInputField.text = "";
+    }
+
+    private void ClearErrorText()
+    {
+        error.text = "";
     }
 
     public void SaveData()
     {
-        //error.text = "";
-        CreateFile();
-        Stream stream = File.Open(path + "\\PlayerData", FileMode.Create);
-        XmlSerializer serializer = new XmlSerializer(typeof(NameData));
-        serializer.Serialize(stream, myName);
-        stream.Close();
+        ClearErrorText();
+        Debug.Log(myName.playerName);
+        if (!string.IsNullOrEmpty(myName.playerName))
+        {
+            CreateFile();
+            Stream stream = File.Open(path + "\\PlayerData", FileMode.Create);
+            XmlSerializer serializer = new XmlSerializer(typeof(NameData));
+            serializer.Serialize(stream, myName);
+            stream.Close();
+        }
+        else
+        {
+            error.text = "Name is required.";
+        }
         //if (!CheckDuplicateName(myName.playerName))
         //{
         //    myNameList[myName.no] = myName;
@@ -70,7 +84,8 @@ public class SaveLoadTest : MonoBehaviour
 
     public void LoadData()
     {
-        if (File.Exists(path))
+        ClearErrorText();
+        if (File.Exists(path + "\\PlayerData"))
         {
             Stream stream = File.Open(path + "\\PlayerData", FileMode.Open);
             XmlSerializer serializer = new XmlSerializer(typeof(NameData));
