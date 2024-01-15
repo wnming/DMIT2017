@@ -18,7 +18,10 @@ public class SaveLoadManager : MonoBehaviour
     [SerializeField] Button startButton;
 
     [SerializeField] TextMeshProUGUI highScoreData;
+    [SerializeField] TextMeshProUGUI currentClick;
+    [SerializeField] TextMeshProUGUI endGameText;
 
+    private string path = $"SaveData\\HighScore";
     private string highScorePath = $"SaveData\\HighScore\\HighScoreData";
 
     private int currentCountDownValue;
@@ -28,6 +31,8 @@ public class SaveLoadManager : MonoBehaviour
 
     void Start()
     {
+        highScorePath = $"{path}\\HighScoreData";
+
         nameScoreData = new HighScoreData();
         currentHighScoreData = new HighScoreData();
 
@@ -40,6 +45,7 @@ public class SaveLoadManager : MonoBehaviour
 
     public void Update()
     {
+        currentClick.text = $"Current click: {nameScoreData.Score}";
         if (isStartGame)
         {
             startButton.GetComponentInChildren<TextMeshProUGUI>().text = "Click!";
@@ -88,13 +94,15 @@ public class SaveLoadManager : MonoBehaviour
     {
         if (nameScoreData.Score > currentHighScoreData.Score)
         {
+            highScoreData.text = $"{nameScoreData.PlayerName}   {nameScoreData.Score}";
             CreateFile();
             Stream stream = File.Open(highScorePath, FileMode.Create);
             XmlSerializer serializer = new XmlSerializer(typeof(HighScoreData));
             serializer.Serialize(stream, nameScoreData);
             stream.Close();
         }
-        QuitApplication();
+        startButton.GetComponentInChildren<TextMeshProUGUI>().text = "Saved";
+        endGameText.text = "Esc to close the game";
     }
 
     public void LoadHighScoreData()
@@ -105,7 +113,7 @@ public class SaveLoadManager : MonoBehaviour
             XmlSerializer serializer = new XmlSerializer(typeof(HighScoreData));
             currentHighScoreData = (HighScoreData)serializer.Deserialize(stream);
             stream.Close();
-            highScoreData.text = $"{currentHighScoreData.PlayerName} {currentHighScoreData.Score}";
+            highScoreData.text = $"{currentHighScoreData.PlayerName}   {currentHighScoreData.Score}";
         }
     }
 
@@ -134,9 +142,9 @@ public class SaveLoadManager : MonoBehaviour
 
     void CreateFile()
     {
-        if (!Directory.Exists(highScorePath))
+        if (!Directory.Exists(path))
         {
-            Directory.CreateDirectory(highScorePath);
+            Directory.CreateDirectory(path);
         }
     }
 }
