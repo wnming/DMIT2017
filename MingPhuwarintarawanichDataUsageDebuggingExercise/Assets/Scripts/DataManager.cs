@@ -32,6 +32,7 @@ public class DataManager : MonoBehaviour
     {
         myContainer = new SaveContainer();
         LoadData();
+        //index out of range
         index = -1;
         playButton.interactable = false;
         deleteButton.interactable = false;
