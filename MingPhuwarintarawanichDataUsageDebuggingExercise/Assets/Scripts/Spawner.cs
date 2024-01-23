@@ -19,6 +19,7 @@ public class Spawner : MonoBehaviour
         LoadData();
 
         gameObject.GetComponent<MeshFilter>().sharedMesh = myShapes[myContainer.players[myContainer.currentIndex].GetShape()].GetComponent<MeshFilter>().sharedMesh;
+        Debug.Log(myContainer.players[myContainer.currentIndex].GetColor());
         gameObject.GetComponent<Renderer>().material = myColors[myContainer.players[myContainer.currentIndex].GetColor()];
     }
 
@@ -36,6 +37,7 @@ public class Spawner : MonoBehaviour
 
     public void SaveScore(int changeScore)
     {
+        Debug.Log(myContainer.players[myContainer.currentIndex].name);
         if (changeScore > myContainer.players[myContainer.currentIndex].GetScore())
         {
             myContainer.players[myContainer.currentIndex].SetScore(changeScore);
@@ -43,7 +45,8 @@ public class Spawner : MonoBehaviour
 
         CheckTopScores(changeScore, myContainer.players[myContainer.currentIndex].GetName());
 
-        Stream stream = File.Open("Profiles.xml", FileMode.Create);
+        //mingfixed - added SaveFiles/
+        Stream stream = File.Open("SaveFiles/Profiles.xml", FileMode.Create);
         XmlSerializer serializer = new XmlSerializer(typeof(SaveContainer));
         serializer.Serialize(stream, myContainer);
         stream.Close();
@@ -58,7 +61,8 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < myContainer.leaders.Length; i++)
         {
-            if (myContainer.leaders[i].GetScore() > checkScore)
+            //mingfixed
+            if (checkScore > myContainer.leaders[i].GetScore())
             {
                 tempScore = myContainer.leaders[i].GetScore();
                 tempName = myContainer.leaders[i].GetName();

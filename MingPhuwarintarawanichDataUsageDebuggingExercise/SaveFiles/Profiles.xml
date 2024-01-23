@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<SaveContainer xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <players />
+  <leaders>
+    <TopScore>
+      <name>Empty</name>
+      <score>0</score>
+    </TopScore>
+    <TopScore>
+      <name>Empty</name>
+      <score>0</score>
+    </TopScore>
+    <TopScore>
+      <name>Empty</name>
+      <score>0</score>
+    </TopScore>
+    <TopScore>
+      <name>Empty</name>
+      <score>0</score>
+    </TopScore>
+    <TopScore>
+      <name>Empty</name>
+      <score>0</score>
+    </TopScore>
+  </leaders>
+  <currentIndex>0</currentIndex>
+</SaveContainer>

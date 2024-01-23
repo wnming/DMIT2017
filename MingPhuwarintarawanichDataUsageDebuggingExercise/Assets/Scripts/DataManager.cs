@@ -63,6 +63,10 @@ public class DataManager : MonoBehaviour
 
     public void SaveData()
     {
+        if (!Directory.Exists("SaveFiles"))
+        {
+            Directory.CreateDirectory("SaveFiles");
+        }
         Stream stream = File.Open("SaveFiles/Profiles.xml", FileMode.Create);
         XmlSerializer serializer = new XmlSerializer(typeof(SaveContainer));
         serializer.Serialize(stream, myContainer);
@@ -154,6 +158,7 @@ public class DataManager : MonoBehaviour
     public void ChangeColor(int changeColor)
     {
         myContainer.players[index].SetColor(changeColor);
+        UpdateProfileButtons();
     }
     public void ChangeShape(int changeShape)
     {
