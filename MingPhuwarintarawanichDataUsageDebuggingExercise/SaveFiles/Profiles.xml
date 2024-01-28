@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <SaveContainer xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <players />
+  <players>
+    <Profile>
+      <name>Profile1</name>
+      <colorIndex>0</colorIndex>
+      <shapeIndex>0</shapeIndex>
+      <score>0</score>
+    </Profile>
+  </players>
   <leaders>
     <TopScore>
       <name>Empty</name>
