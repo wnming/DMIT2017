@@ -3,5 +3,9 @@
   <name>Empty</name>
   <vehicleTypeIndex>0</vehicleTypeIndex>
   <vehicleColorIndex>0</vehicleColorIndex>
-  <highscore>0</highscore>
+  <highscore />
+  <ghostDatas>
+    <ghostVehicleTypeIndex>0</ghostVehicleTypeIndex>
+    <ghostPositionDatas />
+  </ghostDatas>
 </ProfileData>

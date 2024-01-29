@@ -9,6 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Profiling;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -20,9 +21,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI addDeleteButton;
     [SerializeField] TextMeshProUGUI confirmDeleteText;
     [SerializeField] List<TextMeshProUGUI> profileButtons;
-    public int currentProfile;
-    public List<ProfileData> allProfiles;
-    string path;
+    //public int currentProfile;
+    //public List<ProfileData> allProfiles;
 
     public TMP_InputField nameField;
     public TMP_Dropdown typeDropdown;
@@ -35,9 +35,9 @@ public class MainMenuManager : MonoBehaviour
         playButton.SetActive(false);
         addProfileDetail.SetActive(false);
         confirmDeleteProfile.SetActive(false);
-        currentProfile = 0;
+        DataManager.currentProfile = 0;
         highScoreField.interactable = false;
-        allProfiles = new List<ProfileData>();
+        DataManager.allProfiles = new List<ProfileData>();
         LoadData();
     }
 
@@ -56,42 +56,43 @@ public class MainMenuManager : MonoBehaviour
             {
                 Stream stream = File.Open(tempPath, FileMode.Open);
                 XmlSerializer serializer = new XmlSerializer(typeof(ProfileData));
-                allProfiles.Add((ProfileData)serializer.Deserialize(stream));
+                DataManager.allProfiles.Add((ProfileData)serializer.Deserialize(stream));
                 stream.Close();
             }
             else
             {
-                allProfiles.Add(new ProfileData());
+                DataManager.allProfiles.Add(new ProfileData());
             }
-            profileButtons[index].text = allProfiles[index].name;
+            profileButtons[index].text = DataManager.allProfiles[index].name;
         }
     }
 
     public void SaveData()
     {
-        for(int index = 0; index < 3; index++)
-        {
-            if (!Directory.Exists($"SaveData\\Profile{index}"))
-            {
-                Directory.CreateDirectory($"SaveData\\Profile{index}");
-            }
-            Stream stream = File.Open($"SaveData\\Profile{index}\\PlayerData", FileMode.Create);
-            XmlSerializer serializer = new XmlSerializer(typeof(ProfileData));
-            serializer.Serialize(stream, allProfiles[index]);
-            stream.Close();
-        }
+        DataManager.SaveData();
+        //for(int index = 0; index < 3; index++)
+        //{
+        //    if (!Directory.Exists($"SaveData\\Profile{index}"))
+        //    {
+        //        Directory.CreateDirectory($"SaveData\\Profile{index}");
+        //    }
+        //    Stream stream = File.Open($"SaveData\\Profile{index}\\PlayerData", FileMode.Create);
+        //    XmlSerializer serializer = new XmlSerializer(typeof(ProfileData));
+        //    serializer.Serialize(stream, DataManager.allProfiles[index]);
+        //    stream.Close();
+        //}
     }
 
     public void DeleteProfile()
     {
-        confirmDeleteText.text = $"Are you sure you want to delete '{allProfiles[currentProfile].name}'?";
+        confirmDeleteText.text = $"Are you sure you want to delete '{DataManager.allProfiles[DataManager.currentProfile].name}'?";
         confirmDeleteProfile.SetActive(true);
     }
 
     public void Delete()
     {
-        allProfiles[currentProfile] = new ProfileData();
-        profileButtons[currentProfile].text = allProfiles[currentProfile].name;
+        DataManager.allProfiles[DataManager.currentProfile] = new ProfileData();
+        profileButtons[DataManager.currentProfile].text = DataManager.allProfiles[DataManager.currentProfile].name;
         SaveData();
         UpdateFields();
         confirmDeleteProfile.SetActive(false);
@@ -104,15 +105,16 @@ public class MainMenuManager : MonoBehaviour
 
     public void UpdateFields()
     {
-        nameField.text = allProfiles[currentProfile].name.ToLower() == "empty" ? "" : allProfiles[currentProfile].name;
-        typeDropdown.value = allProfiles[currentProfile].vehicleTypeIndex;
-        colorDropdown.value = allProfiles[currentProfile].vehicleColorIndex;
-        highScoreField.text = $"Best time: {allProfiles[currentProfile].highscore.ToString()}";
+        nameField.text = DataManager.allProfiles[DataManager.currentProfile].name.ToLower() == "empty" ? "" : DataManager.allProfiles[DataManager.currentProfile].name;
+        typeDropdown.value = DataManager.allProfiles[DataManager.currentProfile].vehicleTypeIndex;
+        colorDropdown.value = DataManager.allProfiles[DataManager.currentProfile].vehicleColorIndex;
+        float highScore = DataManager.allProfiles[DataManager.currentProfile].highscore.Count == 0 ? 0 : DataManager.allProfiles[DataManager.currentProfile].highscore[0];
+        highScoreField.text = $"Best time: {highScore.ToString()}";
     }
 
     public void ChangeProfile(int profileNo)
     {
-        currentProfile = profileNo;
+        DataManager.currentProfile = profileNo;
 
         UpdateFields();
 
@@ -124,19 +126,24 @@ public class MainMenuManager : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(name))
         {
-            allProfiles[currentProfile].name = name;
-            profileButtons[currentProfile].text = name;
+            DataManager.allProfiles[DataManager.currentProfile].name = name;
+            profileButtons[DataManager.currentProfile].text = name;
             SaveData();
         }
     }
     public void ChangeVehicleType(int vehicleTypeIndex)
     {
-        allProfiles[currentProfile].vehicleTypeIndex = vehicleTypeIndex;
+        DataManager.allProfiles[DataManager.currentProfile].vehicleTypeIndex = vehicleTypeIndex;
         SaveData();
     }
     public void ChangeColor(int vehicleColorIndex)
     {
-        allProfiles[currentProfile].vehicleColorIndex = vehicleColorIndex;
+        DataManager.allProfiles[DataManager.currentProfile].vehicleColorIndex = vehicleColorIndex;
         SaveData();
+    }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(1);
     }
 }
