@@ -13,12 +13,15 @@ public class GhostManager : MonoBehaviour
     Rigidbody rb;
 
     private bool isGhostDataExist = false;
+    private bool isStop = false;
+    private List<GhostPositionData> ghostPositionDatas;
 
     void Start()
     {
         DisabledProps();
         if (DataManager.allProfiles[DataManager.currentProfile].ghostDatas.ghostPositionDatas.Count > 0) 
         {
+            ghostPositionDatas = DataManager.allProfiles[DataManager.currentProfile].ghostDatas.ghostPositionDatas;
             isGhostDataExist = true;
             rb = GetComponent<Rigidbody>();
             gameObject.GetComponent<MeshFilter>().sharedMesh = shark.GetComponent<MeshFilter>().sharedMesh;
@@ -57,9 +60,12 @@ public class GhostManager : MonoBehaviour
     {
         if (isGhostDataExist)
         {
-            if(ghostPositionIndex < DataManager.allProfiles[DataManager.currentProfile].ghostDatas.ghostPositionDatas.Count)
+            if(ghostPositionIndex < ghostPositionDatas.Count)
             {
-                rb.MovePosition(new Vector3(DataManager.allProfiles[DataManager.currentProfile].ghostDatas.ghostPositionDatas[ghostPositionIndex].x, DataManager.allProfiles[DataManager.currentProfile].ghostDatas.ghostPositionDatas[ghostPositionIndex].y, DataManager.allProfiles[DataManager.currentProfile].ghostDatas.ghostPositionDatas[ghostPositionIndex].z));
+                rb.MovePosition(new Vector3(
+                    ghostPositionDatas[ghostPositionIndex].x, 
+                    ghostPositionDatas[ghostPositionIndex].y, 
+                    ghostPositionDatas[ghostPositionIndex].z));
                 ghostPositionIndex += 1;
             }
         }

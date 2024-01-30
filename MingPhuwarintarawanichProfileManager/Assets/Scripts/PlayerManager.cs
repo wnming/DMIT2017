@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -85,7 +86,7 @@ public class PlayerManager : MonoBehaviour
             time.text = $"Time: {timeT += Time.deltaTime}";
             if (Input.GetKey(KeyCode.Escape))
             {
-                Application.Quit();
+                CloseTheGame();
             }
             if (!isSpeedBoostActive) 
             {
@@ -116,26 +117,6 @@ public class PlayerManager : MonoBehaviour
                 ManageLeaderboard();
                 overwritePanel.SetActive(true);
             }
-            //if (DataManager.allProfiles[DataManager.currentProfile].highscore == 0 || timeT <= DataManager.allProfiles[DataManager.currentProfile].highscore)
-            //{
-            //    if (!isGameSave)
-            //    {
-            //        isGameSave = true;
-            //        OrderLeaderboard();
-            //        overwritePanel.SetActive(true);
-            //    }
-            //}
-            //else
-            //{
-            //    if (!isGameSave)
-            //    {
-            //        isGameSave = true;
-            //        //should i really open it?
-            //        //CheckTopFiveTimes();
-            //        //DataManager.SaveData();
-            //        UpdateLeaderboard();
-            //    }
-            //}
         }
     }
 
@@ -176,6 +157,16 @@ public class PlayerManager : MonoBehaviour
     {
         overwritePanel.SetActive(false);
         leaderboardPanel.SetActive(true);
+    }
+
+    public void CloseTheGame()
+    {
+        Application.Quit();
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void FixedUpdate()

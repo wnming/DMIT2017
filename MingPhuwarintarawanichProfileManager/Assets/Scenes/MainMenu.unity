@@ -2074,7 +2074,7 @@ GameObject:
   - component: {fileID: 621366052}
   - component: {fileID: 621366051}
   m_Layer: 5
-  m_Name: AddDeleteButton
+  m_Name: DeleteButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3003,11 +3003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4027750197765698, guid: a68d00f18b7e91a4faef2355a571a32b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 9
+      value: 9.8
       objectReference: {fileID: 0}
     - target: {fileID: 4027750197765698, guid: a68d00f18b7e91a4faef2355a571a32b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4027750197765698, guid: a68d00f18b7e91a4faef2355a571a32b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3019,7 +3019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4027750197765698, guid: a68d00f18b7e91a4faef2355a571a32b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.25
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 4027750197765698, guid: a68d00f18b7e91a4faef2355a571a32b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5509,7 +5509,7 @@ MonoBehaviour:
   addProfileDetail: {fileID: 1033686114}
   confirmDeleteProfile: {fileID: 1091875318}
   playButton: {fileID: 1747095037}
-  addDeleteButton: {fileID: 1065118558}
+  deleteButton: {fileID: 621366049}
   confirmDeleteText: {fileID: 477513312}
   profileButtons:
   - {fileID: 101752290}
