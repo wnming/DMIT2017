@@ -2,20 +2,20 @@
 <SaveContainer xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <players>
     <Profile>
-      <name>Profile1</name>
-      <colorIndex>0</colorIndex>
+      <name>ming</name>
+      <colorIndex>2</colorIndex>
       <shapeIndex>0</shapeIndex>
-      <score>0</score>
+      <score>15</score>
     </Profile>
   </players>
   <leaders>
     <TopScore>
-      <name>Empty</name>
-      <score>0</score>
+      <name>ming</name>
+      <score>15</score>
     </TopScore>
     <TopScore>
-      <name>Empty</name>
-      <score>0</score>
+      <name>ming</name>
+      <score>9</score>
     </TopScore>
     <TopScore>
       <name>Empty</name>

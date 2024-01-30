@@ -109,57 +109,73 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            if(DataManager.allProfiles[DataManager.currentProfile].highscore.Count == 0 || timeT <= DataManager.allProfiles[DataManager.currentProfile].highscore[0])
+            if (!isGameSave)
             {
-                if (!isGameSave)
-                {
-                    isGameSave = true;
-                    overwritePanel.SetActive(true);
-                }
+                isGameSave = true;
+                CheckHighScore();
+                ManageLeaderboard();
+                overwritePanel.SetActive(true);
             }
-            else
-            {
-                if (!isGameSave)
-                {
-                    isGameSave = true;
-                    //CheckTopFiveTimes();
-                    //DataManager.SaveData();
-                    UpdateLeaderboard();
-                }
-            }
+            //if (DataManager.allProfiles[DataManager.currentProfile].highscore == 0 || timeT <= DataManager.allProfiles[DataManager.currentProfile].highscore)
+            //{
+            //    if (!isGameSave)
+            //    {
+            //        isGameSave = true;
+            //        OrderLeaderboard();
+            //        overwritePanel.SetActive(true);
+            //    }
+            //}
+            //else
+            //{
+            //    if (!isGameSave)
+            //    {
+            //        isGameSave = true;
+            //        //should i really open it?
+            //        //CheckTopFiveTimes();
+            //        //DataManager.SaveData();
+            //        UpdateLeaderboard();
+            //    }
+            //}
         }
     }
 
-    void UpdateLeaderboard()
+    void CheckHighScore()
     {
-        for (int index = 0; index < DataManager.allProfiles[DataManager.currentProfile].highscore.Count; index++)
+        if(DataManager.allProfiles[DataManager.currentProfile].highscore == 0 || timeT < DataManager.allProfiles[DataManager.currentProfile].highscore)
         {
-            leaderboardText.text += $"{DataManager.allProfiles[DataManager.currentProfile].highscore[index]}\n";
+            DataManager.allProfiles[DataManager.currentProfile].highscore = timeT;
+            DataManager.SaveData();
         }
-        leaderboardPanel.SetActive(true);
     }
 
-    void CheckTopFiveTimes()
+    void ManageLeaderboard()
     {
-        DataManager.allProfiles[DataManager.currentProfile].highscore.Add(timeT);
-        DataManager.allProfiles[DataManager.currentProfile].highscore = DataManager.allProfiles[DataManager.currentProfile].highscore.OrderBy(x => x == 0).ThenBy(x => x).Take(5).ToList();
+        LeaderboardData leaderboardData = new LeaderboardData();
+        leaderboardData.name = DataManager.allProfiles[DataManager.currentProfile].name;
+        leaderboardData.time = timeT;
+        DataManager.leaderboardList.Add(leaderboardData);
+        DataManager.leaderboardList = DataManager.leaderboardList.OrderBy(x => x.time).Take(5).ToList();
+        DataManager.SaveLeaderboard();
+
+        for (int index = 0; index < DataManager.leaderboardList.Count; index++)
+        {
+            leaderboardText.text += $"{DataManager.leaderboardList[index].name} - {DataManager.leaderboardList[index].time}\n";
+        }
     }
 
     public void SaveGhostData()
     {
-        CheckTopFiveTimes();
         DataManager.allProfiles[DataManager.currentProfile].ghostDatas.ghostVehicleTypeIndex = DataManager.allProfiles[DataManager.currentProfile].vehicleTypeIndex;
         DataManager.allProfiles[DataManager.currentProfile].ghostDatas.ghostPositionDatas = tempGhostPosition;
-        //DataManager.allProfiles[DataManager.currentProfile].highscore = timeT;
         DataManager.SaveData();
         overwritePanel.SetActive(false);
-        UpdateLeaderboard();
+        leaderboardPanel.SetActive(true);
     }
 
     public void RejectSaveGhostData()
     {
         overwritePanel.SetActive(false);
-        UpdateLeaderboard();
+        leaderboardPanel.SetActive(true);
     }
 
     private void FixedUpdate()
