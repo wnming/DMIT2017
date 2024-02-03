@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class OverworldLoad : MonoBehaviour
 {
     GameObject player;
+    private const float FIXED_SCALE = 3.0f;
 
     // Start is called before the first frame update
     void Awake()

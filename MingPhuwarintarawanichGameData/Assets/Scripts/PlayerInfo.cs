@@ -6,6 +6,10 @@ public class PlayerInfo : MonoBehaviour
     public Vector3 spawnLocation;
     public string currentScene;
 
+    public float magnitude;
+    public Vector3 normalized;
+    public Vector3 lastTownPosition;
+
     private void Awake()
     {
         if (piInstance == null) // If there is not yet a gamemanager then this object

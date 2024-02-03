@@ -9,12 +9,13 @@ public class TownManager : MonoBehaviour
     Transform spawnLocation;
     PlayerController player;
     bool transition = false;
+    private const float FIXED_SCALE = 3.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.FindGameObjectWithTag("Player").transform.position = spawnLocation.position;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player.transform.position = (transform.position + (PlayerInfo.piInstance.normalized * PlayerInfo.piInstance.magnitude * FIXED_SCALE));
         player.Fade(false);
     }
 
@@ -30,6 +31,9 @@ public class TownManager : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         player = other.GetComponent<PlayerController>();
+        PlayerInfo.piInstance.magnitude = (other.transform.position - transform.position).magnitude;
+        PlayerInfo.piInstance.normalized = (other.transform.position - transform.position).normalized;
+        PlayerInfo.piInstance.spawnLocation = (PlayerInfo.piInstance.lastTownPosition + ((PlayerInfo.piInstance.normalized * PlayerInfo.piInstance.magnitude) / FIXED_SCALE));
         player.Fade(true);
         transition = true;        
     }

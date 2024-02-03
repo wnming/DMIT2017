@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class TownLoad : MonoBehaviour
 {
@@ -25,9 +27,11 @@ public class TownLoad : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            PlayerInfo.piInstance.spawnLocation = exitLocation.position;
             PlayerInfo.piInstance.currentScene = townName;
             player = other.GetComponent<PlayerController>();
+            PlayerInfo.piInstance.magnitude = (other.transform.position - transform.position).magnitude;
+            PlayerInfo.piInstance.normalized = (other.transform.position - transform.position).normalized;
+            PlayerInfo.piInstance.lastTownPosition = transform.position;
             player.Fade(true);
             transition = true;
         }
