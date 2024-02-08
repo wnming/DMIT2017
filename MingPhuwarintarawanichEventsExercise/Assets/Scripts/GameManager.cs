@@ -52,8 +52,8 @@ public class GameManager : MonoBehaviour
             if (timeLimit <= 0)
             {
                 //end game
-                GameObject[] gosArray = GameObject.FindGameObjectsWithTag("Coin");
-                foreach (GameObject coin in gosArray)
+                GameObject[] coinArray = GameObject.FindGameObjectsWithTag("Coin");
+                foreach (GameObject coin in coinArray)
                 {
                     Destroy(coin);
                 }
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     void ResetValues()
     {
         Time.timeScale = 1;
-        timeLimit = 10.0f;
+        timeLimit = 60.0f;
 
         spawnCounter = 2;
         Score = 0;
