@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PlayerInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <spawnLocation>
+    <x>421.803925</x>
+    <y>1.13777161</y>
+    <z>257.37973</z>
+  </spawnLocation>
+  <currentLocation>
+    <x>421.803925</x>
+    <y>1.13777161</y>
+    <z>257.37973</z>
+  </currentLocation>
+  <currentScene>Overworld</currentScene>
+  <currentHealth>35</currentHealth>
+  <treasure>0</treasure>
+  <magnitude>25.0914688</magnitude>
+  <normalized>
+    <x>0.9898549</x>
+    <y>0.0473376662</y>
+    <z>0.133964881</z>
+  </normalized>
+  <lastTownPosition>
+    <x>408.5</x>
+    <y>0</y>
+    <z>246.17</z>
+  </lastTownPosition>
+  <townInfoList>
+    <TownInfo>
+      <TownName>Town 1</TownName>
+      <enemyHealth>
+        <int>30</int>
+        <int>0</int>
+        <int>30</int>
+      </enemyHealth>
+      <isTreasureCollected>false</isTreasureCollected>
+    </TownInfo>
+    <TownInfo>
+      <TownName>Town 2</TownName>
+      <enemyHealth>
+        <int>30</int>
+        <int>30</int>
+        <int>30</int>
+      </enemyHealth>
+      <isTreasureCollected>false</isTreasureCollected>
+    </TownInfo>
+    <TownInfo>
+      <TownName>Town 3</TownName>
+      <enemyHealth>
+        <int>30</int>
+        <int>30</int>
+        <int>30</int>
+      </enemyHealth>
+      <isTreasureCollected>false</isTreasureCollected>
+    </TownInfo>
+  </townInfoList>
+</PlayerInfo>
