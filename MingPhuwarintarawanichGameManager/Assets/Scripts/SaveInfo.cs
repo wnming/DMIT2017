@@ -25,6 +25,14 @@ public static class SaveInfo
         stream.Close();
     }
 
+    public static void DeleteFile()
+    {
+        if (File.Exists(path + "/PlayerInfo"))
+        {
+            File.Delete(path + "/PlayerInfo");
+        }
+    }
+
     public static void ClearInfo()
     {
         playerInfo = new PlayerInfo();

@@ -26,10 +26,10 @@ public class HealthScript : MonoBehaviour
         healthUI.transform.localScale = new Vector3(currentHealth / (float)maxHealth, 1, 1);
         healthValue.text = currentHealth.ToString();
 
-        if (currentHealth <= 0)
-        {
-            gameObject.SetActive(false);
-        }
+        //if (currentHealth <= 0)
+        //{
+        //    gameObject.SetActive(false);
+        //}
     }
 
     public void ResetHealth(int newHealthValue)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI restingText;
 
     [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject endGamePanel;
+    [SerializeField] TextMeshProUGUI endGameText;
 
     private bool isResting;
 
@@ -35,6 +38,7 @@ public class PlayerManager : MonoBehaviour
         restingText.text = "";
 
         pausePanel.SetActive(false);
+        endGamePanel.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -81,7 +85,14 @@ public class PlayerManager : MonoBehaviour
 
     public void ExitGame()
     {
+        Time.timeScale = 1;
         Application.Quit();
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
     }
 
     IEnumerator Resting()
@@ -99,12 +110,14 @@ public class PlayerManager : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             HealthScript health = GetComponent<HealthScript>();
-            health.ApplyDamage(5);
+            health.ApplyDamage(10);
             SaveInfo.playerInfo.currentHealth = health.currentHealth;
             if (health.currentHealth <= 0)
             {
-                gameObject.SetActive(false);
-                //game over
+                Time.timeScale = 0;
+                endGameText.text = "Game Over!";
+                endGamePanel.SetActive(true);
+                SaveInfo.DeleteFile();
             }
         }
         if (other.gameObject.tag == "Treasure")
@@ -114,7 +127,10 @@ public class PlayerManager : MonoBehaviour
             SaveInfo.playerInfo.treasure += 1;
             if (SaveInfo.playerInfo.treasure >= 3)
             {
-                //win
+                Time.timeScale = 0;
+                endGameText.text = "All treasures have been collected!";
+                endGamePanel.SetActive(true);
+                SaveInfo.DeleteFile();
             }
         }
         if (other.gameObject.tag == "Inn" && !isResting)

@@ -41,10 +41,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void NewGame()
     {
-        if (File.Exists(SaveInfo.path + "/PlayerInfo"))
-        {
-            File.Delete(SaveInfo.path + "/PlayerInfo");
-        }
+        SaveInfo.DeleteFile();
         SaveInfo.ClearInfo();
         SceneManager.LoadScene("Overworld");
     }
