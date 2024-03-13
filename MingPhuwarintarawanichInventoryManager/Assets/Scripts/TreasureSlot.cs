@@ -11,6 +11,8 @@ public class TreasureSlot : MonoBehaviour
     [SerializeField] GameObject treasurePanel;
     [SerializeField] int containerSlot;
 
+    [SerializeField] InventoryUIManager inventoryUIManager;
+
     void Start()
     {
         treasurePanel.SetActive(false);
@@ -21,17 +23,14 @@ public class TreasureSlot : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             DataManager.currentContainer = containerSlot;
             for (int index = 0; index < itemNames.Count; index++)
             {
-                if(DataManager.treasureSlots.FirstOrDefault(x => x.containerSlot == containerSlot).items[index].IsActive)
-                {
-                    itemNames[index].text = DataManager.treasureSlots.FirstOrDefault(x => x.containerSlot == containerSlot).items[index].Name;
-                }
+                itemNames[index].text = DataManager.inventoryControl.treasureSlots.FirstOrDefault(x => x.containerSlot == containerSlot).items.ElementAtOrDefault(index) is not null ? DataManager.inventoryControl.treasureSlots.FirstOrDefault(x => x.containerSlot == containerSlot).items[index].Name : string.Empty;
             }
             treasurePanel.SetActive(true);
         }
@@ -42,6 +41,7 @@ public class TreasureSlot : MonoBehaviour
         if (other.tag == "Player")
         {
             DataManager.currentContainer = 0;
+            inventoryUIManager.EnableButtons();
             treasurePanel.SetActive(false);
         }
     }

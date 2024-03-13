@@ -1,17 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+[Serializable]
+public class Inventory
 {
-    List<TreasureSlot> slots = new List<TreasureSlot>();
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    public List<Item> items = new List<Item>();
 }

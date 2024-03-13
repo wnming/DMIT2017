@@ -14,13 +14,11 @@ public class Item
     public string Name;
     public ItemType Type;
     public int Damage;
-    public bool IsActive;
 
-    public Item(string name, ItemType type, int damage, bool isActive)
+    public Item(string name, ItemType type, int damage)
     {
         Name = name;
         Type = type;
         Damage = damage;
-        IsActive = isActive;
     }
 }
