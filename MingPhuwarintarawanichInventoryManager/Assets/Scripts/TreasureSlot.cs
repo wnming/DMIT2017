@@ -6,7 +6,6 @@ using System.Linq;
 
 public class TreasureSlot : MonoBehaviour
 {
-    [SerializeField] List<Item> items;
     [SerializeField] List<TextMeshProUGUI> itemNames;
     [SerializeField] GameObject treasurePanel;
     [SerializeField] int containerSlot;
@@ -18,9 +17,12 @@ public class TreasureSlot : MonoBehaviour
         treasurePanel.SetActive(false);
     }
 
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.tag == "Player")
+        {
+            inventoryUIManager.EnableButtons();
+        }
     }
 
     private void OnTriggerStay(Collider other)

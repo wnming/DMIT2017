@@ -15,6 +15,7 @@ public class Item
     public ItemType Type;
     public int Damage;
 
+    private Item() { }
     public Item(string name, ItemType type, int damage)
     {
         Name = name;

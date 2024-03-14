@@ -19,6 +19,7 @@ public class InventoryUIManager : MonoBehaviour
 
     void Start()
     {
+        UpdateButtons();
         inventoryPanel.SetActive(false);
         hideInventoryPanel.SetActive(true);
     }
@@ -56,21 +57,24 @@ public class InventoryUIManager : MonoBehaviour
         //treasure
         for (int index = 0; index < treasureButtons.Count; index++)
         {
-            currentItem = DataManager.inventoryControl.treasureSlots.FirstOrDefault(x => x.containerSlot == DataManager.currentContainer).items.ElementAtOrDefault(index) is not null ? DataManager.inventoryControl.treasureSlots.FirstOrDefault(x => x.containerSlot == DataManager.currentContainer).items[index] : null;
-            if (currentItem is not null)
+            if(DataManager.currentContainer != 0)
             {
-                if (currentItem.Type != DataManager.swapType)
+                currentItem = DataManager.inventoryControl.treasureSlots.FirstOrDefault(x => x.containerSlot == DataManager.currentContainer).items.ElementAtOrDefault(index) is not null ? DataManager.inventoryControl.treasureSlots.FirstOrDefault(x => x.containerSlot == DataManager.currentContainer).items[index] : null;
+                if (currentItem is not null)
                 {
-                    treasureButtons[index].interactable = false;
+                    if (currentItem.Type != DataManager.swapType)
+                    {
+                        treasureButtons[index].interactable = false;
+                    }
+                    else
+                    {
+                        treasureButtons[index].interactable = true;
+                    }
                 }
                 else
                 {
-                    treasureButtons[index].interactable = true;
+                    treasureButtons[index].interactable = false;
                 }
-            }
-            else
-            {
-                treasureButtons[index].interactable = false;
             }
         }
 
@@ -170,6 +174,10 @@ public class InventoryUIManager : MonoBehaviour
                 UpdateButtons();
             }
         }
+        else
+        {
+            DataManager.currentSelectedTool = null;
+        }
     }
 
     public void SelectWeapon(int index)
@@ -185,7 +193,6 @@ public class InventoryUIManager : MonoBehaviour
 
     public void UpdateButtons()
     {
-        Debug.Log("update buttons");
         if (!inventoryPanel.activeSelf)
         {
             OpenInventory();
