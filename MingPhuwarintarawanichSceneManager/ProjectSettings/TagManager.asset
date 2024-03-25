@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Gate
   - Door
+  - EnemyBullet
+  - PlayerBullet
+  - WinSpot
+  - Friend
+  - HelpAFriendSpot
   layers:
   - Default
   - TransparentFX

@@ -433,9 +433,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 915180911783562125, guid: d2a6cffd27c3e44449a585a61fc0359d, type: 3}
+      propertyPath: enemyNumber
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2744035215387846840, guid: d2a6cffd27c3e44449a585a61fc0359d, type: 3}
       propertyPath: m_Name
-      value: Enemy2
+      value: Enemy12
       objectReference: {fileID: 0}
     - target: {fileID: 2750536015425250604, guid: d2a6cffd27c3e44449a585a61fc0359d, type: 3}
       propertyPath: m_RootOrder
@@ -1050,6 +1054,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Game_Piramid_01
       objectReference: {fileID: 0}
+    - target: {fileID: 7226899359155137390, guid: a44cccc20f3187546becc81725456fb2, type: 3}
+      propertyPath: m_TagString
+      value: HelpAFriendSpot
+      objectReference: {fileID: 0}
     - target: {fileID: 7998615047934898644, guid: a44cccc20f3187546becc81725456fb2, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1424,6 +1432,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RescueMeGuy
       objectReference: {fileID: 0}
+    - target: {fileID: 3132827565773464112, guid: bfcea97d689d10d4d94915b3072c3800, type: 3}
+      propertyPath: m_TagString
+      value: Friend
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfcea97d689d10d4d94915b3072c3800, type: 3}
 --- !u!1001 &1348677141
@@ -1705,9 +1717,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 915180911783562125, guid: d2a6cffd27c3e44449a585a61fc0359d, type: 3}
+      propertyPath: enemyNumber
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2744035215387846840, guid: d2a6cffd27c3e44449a585a61fc0359d, type: 3}
       propertyPath: m_Name
-      value: Enemy1
+      value: Enemy11
       objectReference: {fileID: 0}
     - target: {fileID: 2750536015425250604, guid: d2a6cffd27c3e44449a585a61fc0359d, type: 3}
       propertyPath: m_RootOrder
