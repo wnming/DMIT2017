@@ -324,7 +324,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38196af26958cfc4dbe85c7f75b2d01b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 0}
+  level1Gun: {fileID: 1733863454}
+  level2Gun: {fileID: 1733863453}
+  level1Bullet: {fileID: 8435806644778612892, guid: 6df91caff3f1db944b2b1c50f089518e, type: 3}
+  level2Bullet: {fileID: 8435806644778612892, guid: bb80eb9fb1714c340bb02fdf3bd47250, type: 3}
+  level1BulletSpawn: {fileID: 1733863452}
+  level2BulletSpawn: {fileID: 1733863451}
+  weaponChangeParticle: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
+--- !u!1 &1733863451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3827220968119801182, guid: b713585f24f940f4eadb10319818ef40, type: 3}
+  m_PrefabInstance: {fileID: 1733863447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1733863452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3625818782447807345, guid: b713585f24f940f4eadb10319818ef40, type: 3}
+  m_PrefabInstance: {fileID: 1733863447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1733863453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7522263204688194067, guid: b713585f24f940f4eadb10319818ef40, type: 3}
+  m_PrefabInstance: {fileID: 1733863447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1733863454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5106687400519558270, guid: b713585f24f940f4eadb10319818ef40, type: 3}
+  m_PrefabInstance: {fileID: 1733863447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1745868775
 GameObject:
   m_ObjectHideFlags: 0
