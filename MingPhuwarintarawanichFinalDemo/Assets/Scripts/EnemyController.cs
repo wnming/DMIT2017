@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
         if(DataManager.currentLevel == 2)
         {
             range = 10.0f;
-            attackTime = 4.0f;
+            attackTime = 1.2f;
         }
         if (Vector3.Distance(transform.position, player.transform.position) < range)
         {
@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
             bulletAudio.Play();
             other.gameObject.SetActive(false);
             HealthScript health = GetComponent<HealthScript>();
-            health.ApplyDamage(10);
+            health.ApplyDamage(DataManager.currentLevel == 1 ? 10 : 25);
             if (health.currentHealth <= 0)
             {
                 killedAudio.Play();

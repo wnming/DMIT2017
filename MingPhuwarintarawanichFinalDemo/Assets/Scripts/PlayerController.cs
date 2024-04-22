@@ -106,13 +106,13 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "EnemyBullet")
         {
+            GameObject.FindGameObjectWithTag("playerHurtAudio").GetComponent<AudioSource>().Play();
             other.gameObject.SetActive(false);
             HealthScript health = GetComponent<HealthScript>();
             health.ApplyDamage(DataManager.currentLevel == 1 ? 5 : 10);
             if (health.currentHealth <= 0)
             {
                 Time.timeScale = 0;
-                //gameOverPanel.SetActive(true);
             }
         }
     }

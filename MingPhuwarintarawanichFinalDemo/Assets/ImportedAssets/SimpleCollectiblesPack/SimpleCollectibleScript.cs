@@ -17,11 +17,17 @@ public class SimpleCollectibleScript : MonoBehaviour {
 
 	[SerializeField] GameObject collectEffect;
 
+	[SerializeField] GameObject keyPanel;
+
 	PlayerController player;
 
 	// Use this for initialization
 	void Start () 
 	{
+		if (keyPanel != null)
+		{
+            keyPanel.SetActive(false);
+        }
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 	
@@ -69,6 +75,8 @@ public class SimpleCollectibleScript : MonoBehaviour {
 
 			//Key
 			DataManager.isKeyCollected = true;
+			keyPanel.SetActive(true);
+
         }
 		Destroy (gameObject);
 	}

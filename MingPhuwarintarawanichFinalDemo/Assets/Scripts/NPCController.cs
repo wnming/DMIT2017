@@ -21,7 +21,7 @@ public class NPCController : MonoBehaviour
 
     [SerializeField] GameObject conversation;
 
-    [SerializeField] Collider level2Collider;
+    [SerializeField] GameObject level2Collider;
 
     GameObject player;
     float range = 7.0f;
@@ -66,7 +66,7 @@ public class NPCController : MonoBehaviour
         if(npcNumber == 2 && DataManager.numberOfKilledGhosts < DataManager.LEVEL_1_GHOSTS)
         {
             text.text = "You need to kill all enemies in order to proceed to level 2!";
-            yield return new WaitForSecondsRealtime(4);
+            yield return new WaitForSecondsRealtime(3);
             text.text = "Hurry up! You're runnning out of time!!!";
             yield return new WaitForSecondsRealtime(3);
             isTalkedToPlayer = false;
@@ -76,7 +76,7 @@ public class NPCController : MonoBehaviour
             for (int index = 0; index < messages.Length; index++)
             {
                 text.text = messages[index];
-                yield return new WaitForSecondsRealtime(5);
+                yield return new WaitForSecondsRealtime(3.5f);
             }
             for (int index = 0; index < colliders.Length; index++)
             {
@@ -86,7 +86,7 @@ public class NPCController : MonoBehaviour
             if(npcNumber == 2)
             {
                 player.GetComponent<PlayerController>().ChangeWeapon();
-                level2Collider.enabled = false;
+                level2Collider.SetActive(false);
                 DataManager.currentLevel = 2;
                 DataManager.numberOfKilledGhosts = 0;
                 levelUp.Play();

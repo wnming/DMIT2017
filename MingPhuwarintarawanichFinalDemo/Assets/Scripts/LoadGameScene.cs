@@ -7,7 +7,6 @@ public class LoadGameScene : MonoBehaviour
 {
     [SerializeField] GameObject playerSpwanLocation;
     GameObject player;
-    [SerializeField] GameObject mainQuestPanel;
 
     void Awake()
     {
@@ -22,16 +21,7 @@ public class LoadGameScene : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = playerSpwanLocation.transform.position;
         player.transform.rotation = playerSpwanLocation.transform.rotation;
-        mainQuestPanel.SetActive(true);
-        Time.timeScale = 0;
     }
-
-    public void CloseMainQuestPanel()
-    {
-        mainQuestPanel.SetActive(false);
-        Time.timeScale = 1;
-    }
-
 
     void Update()
     {
